@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-
+import 'package:kapitan_bomba_go/view/information.dart';
+import 'utils/profile.dart';
 import 'utils/login_view.dart';
 
 void main() => runApp(new MaterialApp(
   home: LoginView()
+  // home : Profile()
+  // home: Information()
 ));
 
 
