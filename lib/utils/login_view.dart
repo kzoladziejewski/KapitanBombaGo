@@ -21,23 +21,36 @@ class _LoginViewState extends State<LoginView> {
       debugPrint("pierwsza apka");
       return loginPage(context);
     } else {
-      debugPrint("sprawdzam kolejne opcje");
-      // return Profile();
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()),);
+      Navigator.pushNamed(context, '/profile');
+      // debugPrint("sprawdzam kolejne opcje");
+      // // return Profile();
+      // setState(() {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => Profile()),
+      //   );
+      // });
     }
   }
 
-  loginPage(context){
+  loginPage(context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Kapitan Bomba: Go"),
         centerTitle: true,
         backgroundColor: Colors.green.shade400,
-        actions: <Widget>[IconButton(
-          icon: Icon(Icons.settings),
-          onPressed: () => debugPrint("Settings tap"),
-        ),
-        getInfoButton(context)
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            // onPressed: () => debugPrint("Settings tap"),
+            onPressed: () {
+              debugPrint("???");
+             // Navigator.pushNamed(context, '/information');
+             // Navigator.pushReplacementNamed(context, '/information');
+             //  Navigator.of(context).pushReplacementNamed("/information");
+            },
+          ),
+          // getInfoButton(context)
         ],
       ),
       backgroundColor: Colors.blueGrey,
@@ -103,7 +116,7 @@ class _LoginViewState extends State<LoginView> {
               Container(
                 child: Padding(
                   padding:
-                  const EdgeInsets.only(left: 20.0, top: 20, right: 20),
+                      const EdgeInsets.only(left: 20.0, top: 20, right: 20),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -136,7 +149,6 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
-
   }
 
   _checkAuthtoken() {
@@ -218,8 +230,6 @@ class _LoginViewState extends State<LoginView> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setString("authtoken", token);
-
-
   }
 
   setLoginAndPasword() async {

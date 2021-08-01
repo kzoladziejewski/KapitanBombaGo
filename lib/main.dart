@@ -1,13 +1,27 @@
+// import 'dart:js';
+// import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:kapitan_bomba_go/view/information.dart';
 import 'utils/profile.dart';
 import 'utils/login_view.dart';
 
+// void main() => runApp(new MaterialApp(home: LoginView()
+//     home: Profile()
+//     home: Information()
+//     ));
+
 void main() => runApp(new MaterialApp(
-  home: LoginView()
-  // home : Profile()
-  // home: Information()
-));
+    title: "Kapitan Bomba: GO",
+home : LoginView(),
+initialRoute: '/',
+routes: {
+
+        // '/' : (BuildContext context) => LoginView(),
+        '/profile': (context) => Profile(),
+        '/information': (context) => Information(),
+},
+)
+);
 
 
 
@@ -121,4 +135,3 @@ void main() => runApp(new MaterialApp(
 //     );
 //   }
 // }
-

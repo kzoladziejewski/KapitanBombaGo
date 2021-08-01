@@ -11,6 +11,7 @@ class Profile extends StatelessWidget {
    int _level = 1;
    int _experience = 0 ;
    DecorationImage _avatar = DecorationImage(image: NetworkImage("https://picsum.photos/500/500"), fit: BoxFit.cover);
+
   @override
   Widget build(BuildContext context) {
     getAuthTokenFromSharedPrefences();
@@ -20,7 +21,7 @@ class Profile extends StatelessWidget {
         title: Text("Witaj twardzielu: $_login"),
         actions: <Widget>[
           getInfoButton(context),
-          IconButton(icon: Icon(Icons.logout), onPressed: () =>_logout(context))
+          IconButton(icon: Icon(Icons.logout), onPressed: () =>_logout_2(context))
         ],
       ),
       body: Container(
@@ -38,13 +39,25 @@ class Profile extends StatelessWidget {
     _authtoken = prefs.getString("authtoken");
     _login = prefs.getString("login");
   }
-
-  _logout(context) async
+  
+  _logout_2(context)
+  {
+    _logout();
+    tryLogout(context);
+  }
+  
+  _logout() async
   {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
   await prefs.clear();
+  debugPrint("?????????????");
+  }
 
+  tryLogout(context)
+  {
+    debugPrint("try logout");
+    Navigator.pop(context);
+    Navigator.of(context).pushNamed("/information");
   }
 
   _getDataFromServer()
