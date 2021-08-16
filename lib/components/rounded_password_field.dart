@@ -2,30 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:kapitan_bomba_go/components/text_field_container.dart';
 import 'package:kapitan_bomba_go/constants/constants.dart';
 
-class RoundedPasswordField extends StatelessWidget {
+class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
-  const RoundedPasswordField({
-    Key key, this.onChanged,
-  }) : super(key: key);
+  final String text;
+  bool state = true;
+  // const RoundedPasswordField({Key key, this.onChanged, this.text}) : super(key: key);
+  RoundedPasswordField({Key key, this.onChanged, this.text, this.state = true}) : super(key: key);
 
   @override
+  _RoundedPasswordFieldState createState() => _RoundedPasswordFieldState();
+}
+
+class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
+  @override
   Widget build(BuildContext context) {
+    // return Container();
     return TextFieldContainer(
         child: TextField(
-          obscureText: true ,
-          onChanged: onChanged,
+          obscureText: widget.state,
+          onChanged: widget.onChanged,
           decoration: InputDecoration(
-            hintText: login_password_text,
+            hintText: widget.text,
 
             icon: Icon(
               Icons.lock,
               color: kPrimaryColor,
             ),
 
-            suffixIcon: Icon(Icons.visibility, color: kPrimaryColor),
+            suffixIcon: IconButton(
+              icon: Icon(Icons.visibility),
+              color: kPrimaryColor,
+              onPressed: () => setState(() => widget.state = !widget.state)
+              // {
+              // },
+            ),
             border: InputBorder.none,
 
           ),
         ));
   }
 }
+

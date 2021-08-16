@@ -9,21 +9,18 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          GestureDetector(
-            onTap: press,
-            child: Text(
-             login_forget_password ,
-              style: TextStyle(color: Colors.red),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        GestureDetector(
+          onTap: press,
+          child: Text(
+           login_forget_password ,
+            style: TextStyle(color: Colors.red),
 
-            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
