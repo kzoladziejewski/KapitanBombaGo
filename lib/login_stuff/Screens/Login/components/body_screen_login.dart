@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kapitan_bomba_go/components/already_have_an_account_acheck.dart';
+import 'package:kapitan_bomba_go/components/forgot_password.dart';
+import 'package:kapitan_bomba_go/components/rounded_button.dart';
+import 'package:kapitan_bomba_go/components/rounded_input_field.dart';
+import 'package:kapitan_bomba_go/components/rounded_password_field.dart';
+import 'package:kapitan_bomba_go/components/text_field_container.dart';
+import 'package:kapitan_bomba_go/constants/constants.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/Login/components/background_screen_login.dart';
 
 class BodyLoginScreen extends StatelessWidget {
@@ -23,12 +30,21 @@ class BodyLoginScreen extends StatelessWidget {
             height: size.height * 0.3,
             width: size.width * 0.3,
           ),
-          Container(
-            padding: EdgeInsets.zero,
-            // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          )
+          RoundeddInputField(hintText: login_login_text, onChanged: (value) {}),
+          RoundedPasswordField(
+            onChanged: (value) {},
+          ),
+          RoundedButton(
+            text: login_button,
+            press: () {},
+            color: kPrimaryColor,
+          ),
+          AlreadyHaveAnAccountCheck(press: () {}),
+
+          ForgotPassword(press: () {}),
         ],
       ),
     );
   }
 }
+

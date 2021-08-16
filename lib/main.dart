@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:kapitan_bomba_go/constants/constants.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/Welcome/welcome_screen.dart';
 import 'package:kapitan_bomba_go/view/information.dart';
-import 'utils/profile.dart';
-import 'utils/login_view.dart';
 //
 // void main() => runApp(new MaterialApp(home: LoginView()
 //     home: WelocmeScreen()

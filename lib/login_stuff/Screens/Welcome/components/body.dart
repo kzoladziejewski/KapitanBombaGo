@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kapitan_bomba_go/constants/constants.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/Login/login_screen.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/Welcome/components/background.dart';
-import 'package:kapitan_bomba_go/utils/rounded_button.dart';
+import 'package:kapitan_bomba_go/components//rounded_button.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -15,7 +15,7 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Kapitan Bomba Go",
+              title_main_view,
               style:  TextStyle(fontWeight: FontWeight.bold),
           ),
             SizedBox(height: size.height * 0.03,),
@@ -23,7 +23,7 @@ class Body extends StatelessWidget {
             ),
             SizedBox(height: size.height * 0.05,),
 
-            RoundedButton(text: "Jestem żołnierzem Gwiezdnej Floty tempy chuju!",
+            RoundedButton(text: login_button_text,
               press: (){
               Navigator.push(
                   context, MaterialPageRoute(
@@ -33,7 +33,8 @@ class Body extends StatelessWidget {
               );
               },
               color: Colors.white ),
-            RoundedButton(text: "Chce dołączyć by móc napierdalać!!",
+            RoundedButton(
+                text: register_button_text,
                 press: (){},
                 color: kPrimaryLightColor  ),
           ],
