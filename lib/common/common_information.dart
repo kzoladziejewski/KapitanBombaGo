@@ -7,11 +7,5 @@ return IconButton(icon: Icon(Icons.info), onPressed: () => informationButton(con
 
 informationButton(context)
 {
-    // Navigator.push(context, MaterialPageRoute(builder: (context) => Information()),
-    // setState(());
     Navigator.pushNamed(context, '/information');
-  // Navigator.pushReplacementNamed(context, '/information');
-  //  Navigator.of(context).pushNamed("/information");
-  //   Navigator.pop(context);
-  // );
 }

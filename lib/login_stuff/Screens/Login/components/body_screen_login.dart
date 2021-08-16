@@ -34,27 +34,42 @@ class BodyLoginScreen extends StatelessWidget {
             width: size.width * 0.2,
           ),
           RoundeddInputField(hintText: login_login_text, onChanged: (value) {}),
-          RoundedPasswordField(text: login_password_text,onChanged: (value) {},),
-          RoundedButton(text: login_button, press: () {}, color: kPrimaryColor,),
-          AlreadyHaveAnAccountCheck(press: () {
-            Navigator.push(
-              context, MaterialPageRoute(
-              builder: (context) {
-                return SignUpScreen();},),);
-          },
+          RoundedPasswordField(
+            text: login_password_text,
+            onChanged: (value) {},
           ),
-          SizedBox(height: size.height * 0.02,),
+          RoundedButton(
+            text: login_button,
+            press: () {},
+            color: kPrimaryColor,
+          ),
+          AlreadyHaveAnAccountCheck(
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SignUpScreen();
+                  },
+                ),
+              );
+            },
+          ),
+          SizedBox(
+            height: size.height * 0.02,
+          ),
           ForgotPassword(press: () {
             Navigator.push(
-              context, MaterialPageRoute(
-              builder: (context) {
-              return ForgotScreen();
-            },),);
-
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return ForgotScreen();
+                },
+              ),
+            );
           }),
         ],
       ),
     );
   }
 }
-

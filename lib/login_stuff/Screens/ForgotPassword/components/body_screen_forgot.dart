@@ -7,9 +7,7 @@ import 'package:kapitan_bomba_go/login_stuff/Screens/ForgotPassword/components/b
 import 'package:kapitan_bomba_go/utils/login_verification.dart';
 
 class BodyForgotScreen extends StatelessWidget {
-  const BodyForgotScreen({
-    Key key
-  }) : super(key: key);
+  const BodyForgotScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +26,30 @@ class BodyForgotScreen extends StatelessWidget {
             height: size.height * 0.2,
             width: size.width * 0.2,
           ),
-          RoundeddInputField(hintText: forgot_password_text, onChanged: (value) {
-            recovery_email = value;
-          }),
+          RoundeddInputField(
+              hintText: forgot_password_text,
+              onChanged: (value) {
+                recovery_email = value;
+              }),
           RoundedButton(
             text: forgot_password_button,
             press: () {
               VerificationEmail ve = VerificationEmail(recovery_email);
-              if(ve.verificate_email()) {
+              if (ve.verificate_email()) {
                 debugPrint("??");
+              } else {
+                final scaffold = ScaffoldMessenger.of(context);
+                scaffold.showSnackBar(
+                  SnackBar(
+                    content: Text(wrong_email),
+                    action: SnackBarAction(
+                      label: 'UNDO',
+                      onPressed: scaffold.hideCurrentSnackBar,
+                    ),
+                  ),
+                );
               }
-              else {
-              final scaffold = ScaffoldMessenger.of(context);
-              scaffold.showSnackBar(
-                SnackBar(
-                  content: Text(wrong_email),
-                  action: SnackBarAction(
-                    label: 'UNDO',
-                    onPressed: scaffold.hideCurrentSnackBar,
-                  ),),);            }},
+            },
             color: kPrimaryColor,
           ),
         ],

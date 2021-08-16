@@ -3,9 +3,8 @@ import 'package:kapitan_bomba_go/constants/constants.dart';
 
 class ForgotPassword extends StatelessWidget {
   final Function press;
-  const ForgotPassword({
-    Key key, this.press
-  }) : super(key: key);
+
+  const ForgotPassword({Key key, this.press}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +14,8 @@ class ForgotPassword extends StatelessWidget {
         GestureDetector(
           onTap: press,
           child: Text(
-           login_forget_password ,
+            login_forget_password,
             style: TextStyle(color: Colors.red),
-
           ),
         ),
       ],

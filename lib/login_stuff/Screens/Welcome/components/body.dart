@@ -11,42 +11,54 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Background(child:SingleChildScrollView(
-      child: Column(
+    return Background(
+      child: SingleChildScrollView(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               title_main_view,
-              style:  TextStyle(fontWeight: FontWeight.bold),
-          ),
-            SizedBox(height: size.height * 0.02,),
-            SvgPicture.asset("assets/icon/chat.svg", height: size.height * 0.3,
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: size.height * 0.02,),
-
-            RoundedButton(text: login_button_text,
-              press: (){
-              Navigator.push(
-                  context, MaterialPageRoute(
-                  builder: (context){
-                    return LoginScreen();},
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            SvgPicture.asset(
+              "assets/icon/chat.svg",
+              height: size.height * 0.3,
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            RoundedButton(
+                text: login_button_text,
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LoginScreen();
+                      },
                     ),
-              );
-              },
-              color: Colors.white ),
+                  );
+                },
+                color: Colors.white),
             RoundedButton(
                 text: register_button_text,
-                press: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return SignUpScreen();
-                  },),);
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SignUpScreen();
+                      },
+                    ),
+                  );
                 },
-                color: kPrimaryLightColor  ),
+                color: kPrimaryLightColor),
           ],
         ),
-    ),
-      );
+      ),
+    );
   }
 }
-
-

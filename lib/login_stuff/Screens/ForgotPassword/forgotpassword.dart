@@ -10,7 +10,7 @@ class ForgotScreen extends StatelessWidget {
         preferredSize: const Size.fromHeight(30),
         child: AppBarForAll(),
       ),
-      body: BodyForgotScreen(),);
+      body: BodyForgotScreen(),
+    );
   }
 }
-

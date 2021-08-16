@@ -5,12 +5,12 @@ import 'package:kapitan_bomba_go/login_stuff/Screens/Login/components/body_scree
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(30),
         child: AppBarForAll(),
       ),
-      body: BodyLoginScreen(),);
+      body: BodyLoginScreen(),
+    );
   }
 }

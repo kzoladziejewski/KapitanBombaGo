@@ -4,8 +4,11 @@ import 'package:kapitan_bomba_go/constants/constants.dart';
 class AlreadyHaveAnAccountCheck extends StatelessWidget {
   final bool login;
   final Function press;
+
   const AlreadyHaveAnAccountCheck({
-    Key key, this.login = true, this.press,
+    Key key,
+    this.login = true,
+    this.press,
   }) : super(key: key);
 
   @override
@@ -16,7 +19,7 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
         GestureDetector(
           onTap: press,
           child: Text(
-            login ? login_create_new_account : login_create_new_account ,
+            login ? login_create_new_account : login_create_new_account,
             style: TextStyle(color: kPrimaryColor),
           ),
         ),

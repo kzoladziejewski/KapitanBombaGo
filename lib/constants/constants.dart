@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-const kPrimaryColor= Color(0xFF6F35A5);
-const kPrimaryLightColor= Color(0xFFF1E6FF);
+const kPrimaryColor = Color(0xFF6F35A5);
+const kPrimaryLightColor = Color(0xFFF1E6FF);
 
 //Main view
 String title_main_view = "Kapitan Bomba Go";
 String login_button_text = "Jestem żołnierzem Gwiezdnej Floty tempy chuju!";
 String register_button_text = "Chce dołączyć by móc napierdalać!";
-
 
 //Login page
 String login_title_text = "Podaj swój login twardzielu";

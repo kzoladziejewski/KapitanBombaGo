@@ -8,22 +8,26 @@ class AppBarForAll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        centerTitle: true,
-        title: Text(title_main_view,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 15, color: Colors.white),
-
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.info, color: Colors.white),
-    onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
+      centerTitle: true,
+      title: Text(
+        title_main_view,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 15, color: Colors.white),
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.info, color: Colors.white),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
                 builder: (context) {
                   return InfoKapitanBomba();
-                },),);
-    },
-    )
+                },
+              ),
+            );
+          },
+        )
       ],
     );
   }
