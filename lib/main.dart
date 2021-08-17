@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kapitan_bomba_go/constants/constants.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/Welcome/welcome_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+
+void main() async {
   runApp(MyApp());
 }
 

@@ -4,6 +4,8 @@ import 'package:kapitan_bomba_go/login_stuff/Screens/Welcome/welcome_screen.dart
 import 'package:kapitan_bomba_go/view/information.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../main.dart';
+
 class AppBarForLogout extends StatelessWidget {
   const AppBarForLogout({Key key}) : super(key: key);
 
@@ -51,7 +53,7 @@ class AppBarForLogout extends StatelessWidget {
 
   _logout(context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
+    // sp.clear();
     await prefs.clear();
   }
 }

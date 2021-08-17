@@ -4,73 +4,80 @@ import 'package:kapitan_bomba_go/components/app_bar_for_all.dart';
 import 'package:kapitan_bomba_go/components/app_bar_with_logout.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Profile extends StatelessWidget {
-  String _login = '';
-  String _authtoken = '';
-  int _level = 1;
-  int _experience = 0;
+import '../main.dart';
 
-  DecorationImage _avatar = DecorationImage(
+class ProfileInfo extends StatefulWidget {
+  String login = '';
+  String authtoken = '';
+  int level = 1;
+  int experience = 0;
+
+  DecorationImage avatar = DecorationImage(
       image: NetworkImage("https://picsum.photos/500/500"), fit: BoxFit.cover);
+
+  // ProfileInfo({Key key, this.login, this.authtoken, this.level, this.experience})
+  ProfileInfo({Key key}) : super(key: key);
+
+  @override
+  _ProfileInfoState createState() => _ProfileInfoState();
+}
+
+class _ProfileInfoState extends State<ProfileInfo> {
+
+  Future<Null> getAuthTokenFromSharedPrefences() async {
+    debugPrint("**************************************");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      widget.authtoken = prefs.getString("_auth");
+      widget.login = prefs.getString("_login");
+
+    });
+
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAuthTokenFromSharedPrefences();
+  }
 
   @override
   Widget build(BuildContext context) {
-    getAuthTokenFromSharedPrefences();
-    _getDataFromServer();
-    return Scaffold(
-        // appBar: AppBar(
-        //   title: Text("Witaj twardzielu: $_login"),
-        //   actions: <Widget>[
-        //     getInfoButton(context),
-        //     IconButton(
-        //         icon: Icon(Icons.logout), onPressed: () => _logout(context))
-        //   ],
-        // ),
+    getDataFromServer();
+    return new Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(30),
           child: AppBarForLogout(),
-
         ),
         body: Container(
           alignment: Alignment.topCenter,
           child: Stack(
             alignment: Alignment.topCenter,
-            children: <Widget>[_getAvatar(), getData()],
+            children: <Widget>[getAvatar(), getData()],
           ),
         ));
   }
 
-  getAuthTokenFromSharedPrefences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _authtoken = prefs.getString("authtoken");
-    _login = prefs.getString("_login");
+  void getDataFromServer() {
+    debugPrint("********************************");
+    debugPrint(widget.authtoken);
+    debugPrint("********************************");
   }
 
-  _logout(context) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    await prefs.clear();
-  }
-
-  _getDataFromServer() {
-    if (_authtoken != null && _authtoken.isNotEmpty) {
-      _level = 1;
-      _experience = 0;
-    }
-    //tutaj bedzie pobieranie danych z serwera takich jak poziom, doswiadczenie, avatar,
-  }
-
-  _getAvatar() {
+  getAvatar() {
     return Container(
         width: 300,
         height: 300,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(50.0)),
-            image: _avatar));
+            image: widget.avatar));
   }
 
   getData() {
+    String login = widget.login;
+    int level = widget.level;
+    int experience = widget.experience;
     return Container(
       height: 250,
       margin: EdgeInsets.only(top: 300),
@@ -78,11 +85,11 @@ class Profile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Tempy chuj o imieniu: $_login",
+            "Tempy chuj o imieniu: $login",
             style: TextStyle(fontSize: 20, color: Colors.red),
           ),
           Text(
-            "Tempy chuj na poziomie: $_level",
+            "Tempy chuj na poziomie: $level",
             style: TextStyle(fontSize: 20, color: Colors.red),
           ),
           Text(
@@ -90,7 +97,7 @@ class Profile extends StatelessWidget {
             style: TextStyle(fontSize: 20, color: Colors.red),
           ),
           Text(
-            "$_experience / ${calcTotalExp()}",
+            "$experience / ${calcTotalExp()}",
             style: TextStyle(fontSize: 20, color: Colors.red),
           ),
         ],
@@ -99,6 +106,20 @@ class Profile extends StatelessWidget {
   }
 
   calcTotalExp() {
-    return _level * 10 * 2137 * 0.5;
+    return widget.level * 10 * 2137 * 0.5;
   }
 }
+
+//
+//   _getDataFromServer() {
+//     if (_authtoken != null && _authtoken.isNotEmpty) {
+//       _level = 1;
+//       _experience = 0;
+//     }
+//     //tutaj bedzie pobieranie danych z serwera takich jak poziom, doswiadczenie, avatar,
+//   }
+//
+//
+//
+
+// }

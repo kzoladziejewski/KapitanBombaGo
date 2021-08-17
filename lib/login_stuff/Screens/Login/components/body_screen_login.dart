@@ -62,7 +62,7 @@ class BodyLoginScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return Profile();
+                      return ProfileInfo();
                     },
                   ),
                 );
@@ -115,13 +115,15 @@ class BodyLoginScreen extends StatelessWidget {
   Future<bool> login_to_system(String login, String password) async {
     String auth_link = page_address + auth;
     Map<String, String> header = {'Content-Type': 'application/json'};
-    final msg = jsonEncode({'username': 'Jocelyn Wheeler', 'password': password});
+    // final msg = jsonEncode({'username': 'Jocelyn Wheeler', 'password': password});
+    final msg = jsonEncode({'username': 'Jocelyn Wheeler', 'password': 'pijany'});
     var url = Uri.parse(auth_link);
 
     var response = await http.post(url,
         headers: header,
         body: msg);
     if (response.statusCode == 200) {
+      debugPrint(response.body);
       saveAuthToContainer(response.body);
       return Future<bool>.value(true);
     }
@@ -134,10 +136,10 @@ class BodyLoginScreen extends StatelessWidget {
   }
 
   saveAuthToContainer(auth) async {
+
+    var authe = auth.toString().substring(3, (auth.toString().length-3)).split(" ");
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString("_auth", auth);
+    preferences.setString("_auth", authe.last);
   }
-
-
 
 }
