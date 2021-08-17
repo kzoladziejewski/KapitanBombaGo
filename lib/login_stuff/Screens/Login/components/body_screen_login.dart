@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kapitan_bomba_go/components/already_have_an_account_acheck.dart';
@@ -5,13 +7,15 @@ import 'package:kapitan_bomba_go/components/forgot_password.dart';
 import 'package:kapitan_bomba_go/components/rounded_button.dart';
 import 'package:kapitan_bomba_go/components/rounded_input_field.dart';
 import 'package:kapitan_bomba_go/components/rounded_password_field.dart';
-import 'package:kapitan_bomba_go/components/text_field_container.dart';
+import 'package:kapitan_bomba_go/constants/constant_date.dart';
 import 'package:kapitan_bomba_go/constants/constants.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/ForgotPassword/forgotpassword.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/Login/components/background_screen_login.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/SignUp/signup.dart';
 import 'package:kapitan_bomba_go/view/profil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:http/http.dart' as http;
 
 class BodyLoginScreen extends StatelessWidget {
   const BodyLoginScreen({
@@ -20,7 +24,9 @@ class BodyLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     String login = null;
     String password = null;
     return Background(
@@ -48,32 +54,31 @@ class BodyLoginScreen extends StatelessWidget {
           ),
           RoundedButton(
             text: login_button,
-            press: () {
-              if (login_to_system(login, password))
-                {
-                  saveToContainer(login, password);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return Profile();
-                      },
+            press: () async {
+              var is_logged_suc = await login_to_system(login, password);
+              if (is_logged_suc) {
+                saveLoginToContainer(login);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Profile();
+                    },
+                  ),
+                );
+              }
+              else {
+                final scaffold = ScaffoldMessenger.of(context);
+                scaffold.showSnackBar(
+                  SnackBar(
+                    content: Text(fakap_login),
+                    action: SnackBarAction(
+                      label: 'UNDO',
+                      onPressed: scaffold.hideCurrentSnackBar,
                     ),
-                  );
-                }
-              else
-                {
-                  final scaffold = ScaffoldMessenger.of(context);
-                  scaffold.showSnackBar(
-                    SnackBar(
-                      content: Text(fakap_login),
-                      action: SnackBarAction(
-                        label: 'UNDO',
-                        onPressed: scaffold.hideCurrentSnackBar,
-                      ),
-                    ),
-                  );
-                }
+                  ),
+                );
+              }
             },
             color: kPrimaryColor,
           ),
@@ -106,14 +111,33 @@ class BodyLoginScreen extends StatelessWidget {
       ),
     );
   }
-  bool login_to_system(String login, String password) {
-    return true;
+
+  Future<bool> login_to_system(String login, String password) async {
+    String auth_link = page_address + auth;
+    Map<String, String> header = {'Content-Type': 'application/json'};
+    final msg = jsonEncode({'username': 'Jocelyn Wheeler', 'password': password});
+    var url = Uri.parse(auth_link);
+
+    var response = await http.post(url,
+        headers: header,
+        body: msg);
+    if (response.statusCode == 200) {
+      saveAuthToContainer(response.body);
+      return Future<bool>.value(true);
+    }
+    return Future<bool>.value(false);
   }
 
-  saveToContainer(login, password) async {
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  preferences.setString("_login", login);
+  saveLoginToContainer(login) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("_login", login);
   }
+
+  saveAuthToContainer(auth) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString("_auth", auth);
+  }
+
 
 
 }
