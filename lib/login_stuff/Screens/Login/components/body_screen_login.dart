@@ -10,6 +10,8 @@ import 'package:kapitan_bomba_go/constants/constants.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/ForgotPassword/forgotpassword.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/Login/components/background_screen_login.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/SignUp/signup.dart';
+import 'package:kapitan_bomba_go/view/profil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BodyLoginScreen extends StatelessWidget {
   const BodyLoginScreen({
@@ -19,6 +21,8 @@ class BodyLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    String login = null;
+    String password = null;
     return Background(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -33,14 +37,44 @@ class BodyLoginScreen extends StatelessWidget {
             height: size.height * 0.2,
             width: size.width * 0.2,
           ),
-          RoundeddInputField(hintText: login_login_text, onChanged: (value) {}),
+          RoundeddInputField(hintText: login_login_text, onChanged: (value) {
+            login = value;
+          }),
           RoundedPasswordField(
             text: login_password_text,
-            onChanged: (value) {},
+            onChanged: (value) {
+              password = value;
+            },
           ),
           RoundedButton(
             text: login_button,
-            press: () {},
+            press: () {
+              if (login_to_system(login, password))
+                {
+                  saveToContainer(login, password);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Profile();
+                      },
+                    ),
+                  );
+                }
+              else
+                {
+                  final scaffold = ScaffoldMessenger.of(context);
+                  scaffold.showSnackBar(
+                    SnackBar(
+                      content: Text(fakap_login),
+                      action: SnackBarAction(
+                        label: 'UNDO',
+                        onPressed: scaffold.hideCurrentSnackBar,
+                      ),
+                    ),
+                  );
+                }
+            },
             color: kPrimaryColor,
           ),
           AlreadyHaveAnAccountCheck(
@@ -72,4 +106,14 @@ class BodyLoginScreen extends StatelessWidget {
       ),
     );
   }
+  bool login_to_system(String login, String password) {
+    return true;
+  }
+
+  saveToContainer(login, password) async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setString("_login", login);
+  }
+
+
 }

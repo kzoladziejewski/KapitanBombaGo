@@ -33,3 +33,4 @@ String forgot_password_button = "Oddaj moje dane złodziejska mendo!";
 //SnackBar
 
 String wrong_email = "Co ty kurwa nie wiesz co to imejl?";
+String fakap_login = "Czyżbys był szpiegiem sułtana kosmitów?";

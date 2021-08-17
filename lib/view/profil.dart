@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kapitan_bomba_go/common/common_information.dart';
+import 'package:kapitan_bomba_go/components/app_bar_for_all.dart';
+import 'package:kapitan_bomba_go/components/app_bar_with_logout.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatelessWidget {
@@ -16,13 +18,18 @@ class Profile extends StatelessWidget {
     getAuthTokenFromSharedPrefences();
     _getDataFromServer();
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Witaj twardzielu: $_login"),
-          actions: <Widget>[
-            getInfoButton(context),
-            IconButton(
-                icon: Icon(Icons.logout), onPressed: () => _logout(context))
-          ],
+        // appBar: AppBar(
+        //   title: Text("Witaj twardzielu: $_login"),
+        //   actions: <Widget>[
+        //     getInfoButton(context),
+        //     IconButton(
+        //         icon: Icon(Icons.logout), onPressed: () => _logout(context))
+        //   ],
+        // ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(30),
+          child: AppBarForLogout(),
+
         ),
         body: Container(
           alignment: Alignment.topCenter,
@@ -36,7 +43,7 @@ class Profile extends StatelessWidget {
   getAuthTokenFromSharedPrefences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _authtoken = prefs.getString("authtoken");
-    _login = prefs.getString("login");
+    _login = prefs.getString("_login");
   }
 
   _logout(context) async {
