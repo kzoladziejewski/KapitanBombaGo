@@ -1,8 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:kapitan_bomba_go/common/common_information.dart';
 import 'package:kapitan_bomba_go/components/app_bar_for_all.dart';
 import 'package:kapitan_bomba_go/components/app_bar_with_logout.dart';
+import 'package:kapitan_bomba_go/constants/constant_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 import '../main.dart';
 
@@ -23,16 +28,13 @@ class ProfileInfo extends StatefulWidget {
 }
 
 class _ProfileInfoState extends State<ProfileInfo> {
-
   Future<Null> getAuthTokenFromSharedPrefences() async {
-    debugPrint("**************************************");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       widget.authtoken = prefs.getString("_auth");
       widget.login = prefs.getString("_login");
-
+      getDataFromServer();
     });
-
   }
 
   @override
@@ -43,7 +45,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
   @override
   Widget build(BuildContext context) {
-    getDataFromServer();
     return new Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(30),
@@ -58,10 +59,19 @@ class _ProfileInfoState extends State<ProfileInfo> {
         ));
   }
 
-  void getDataFromServer() {
-    debugPrint("********************************");
+  void getDataFromServer() async {
     debugPrint(widget.authtoken);
-    debugPrint("********************************");
+    var authtoken = widget.authtoken.replaceAll('"', '');
+    Map<String, String> header = {
+      HttpHeaders.contentTypeHeader : 'application/json',
+      HttpHeaders.authorizationHeader: 'JWT $authtoken'};
+    debugPrint(header.toString());
+    String get_user_data_link = page_address + player + "/" + "Jocelyn Wheeler";
+    var url = Uri.parse(get_user_data_link);
+    var response = await http.get(url, headers: header);
+    debugPrint(response.body);
+
+    debugPrint(response.toString());
   }
 
   getAvatar() {
