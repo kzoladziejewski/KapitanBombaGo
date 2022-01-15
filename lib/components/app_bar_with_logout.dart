@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kapitan_bomba_go/constants/constants.dart';
 import 'package:kapitan_bomba_go/login_stuff/Screens/Welcome/welcome_screen.dart';
 import 'package:kapitan_bomba_go/view/information.dart';
+import 'package:kapitan_bomba_go/view/profil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
@@ -46,7 +47,19 @@ class AppBarForLogout extends StatelessWidget {
             );
           },
         ),
-
+        IconButton(
+          icon: Icon(Icons.person_rounded, color: Colors.white),
+          onPressed: ()
+          {
+            Navigator.push(context, MaterialPageRoute
+              (
+              builder: (context) {
+                return ProfileInfo();
+              },
+            ),
+            );
+          },
+        ),
       ],
     );
   }

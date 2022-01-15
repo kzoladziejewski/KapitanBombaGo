@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kapitan_bomba_go/GameStuff/Maps/Map.dart';
 import 'package:kapitan_bomba_go/components/already_have_an_account_acheck.dart';
 import 'package:kapitan_bomba_go/components/forgot_password.dart';
 import 'package:kapitan_bomba_go/components/rounded_button.dart';
@@ -62,7 +63,7 @@ class BodyLoginScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return ProfileInfo();
+                      return GameMap();
                     },
                   ),
                 );
